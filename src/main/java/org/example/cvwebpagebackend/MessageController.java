@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class ContactFormController {
+public class MessageController {
 
     @PostMapping("/submit-message")
     public String submitMessage(@RequestParam String name, @RequestParam String email, @RequestParam String message) {
