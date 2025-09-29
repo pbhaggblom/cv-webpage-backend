@@ -13,7 +13,7 @@ public class MessageService {
         this.mailService = mailService;
     }
 
-    public String saveMessage(String name, String email, String content) {
+    public String saveAndNotify(String name, String email, String content) {
         Message message = new Message(name, email, content);
         messageRepository.save(message);
         mailService.sendEmailNotification(message);

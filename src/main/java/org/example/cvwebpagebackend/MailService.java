@@ -1,13 +1,16 @@
 package org.example.cvwebpagebackend;
 
+import brevoModel.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
+import java.util.List;
+
+import brevo.ApiClient;
+import brevo.ApiException;
+import brevo.Configuration;
+import brevo.auth.*;
+import brevoApi.TransactionalEmailsApi;
 
 @Service
 public class MailService {
@@ -15,32 +18,47 @@ public class MailService {
     @Value("${api.key}")
     private String apiKey;
 
-    @Value("${notification.recipient}")
-    private String recipient;
-
-    @Value("${template.id}")
-    private String templateId;
+    @Value("${notification.address}")
+    private String notificationAddress;
 
     public void sendEmailNotification(Message message) {
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("https://api.brevo.com/v3/smtp/email"))
-                .header("accept", "application/json")
-                .header("content-type", "application/json")
-                .header("api-key", apiKey)
-                .method("POST", HttpRequest.BodyPublishers.ofString(
-                        "{\"params\":" +
-                                "{\"NAME\":\"" + message.getName() + "\"," +
-                                "\"EMAIL\":\"" + message.getEmail() + "\"," +
-                                "\"CONTENT\":\"" + message.getMessage() + "\"}," +
-                                "\"to\":[{\"email\":\"" + recipient + "\"}]," +
-                                "\"templateId\":" + templateId + "}"))
-                .build();
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+        ApiKeyAuth apiKeyAuth = (ApiKeyAuth) defaultClient.getAuthentication("api-key");
+        apiKeyAuth.setApiKey(apiKey);
+
+        TransactionalEmailsApi apiInstance = new TransactionalEmailsApi();
+        SendSmtpEmail sendSmtpEmail = createSendSmtpEmail(message);
+
         try {
-            HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-            System.out.println(response.body());
-        } catch (IOException | InterruptedException e) {
+            CreateSmtpEmail result = apiInstance.sendTransacEmail(sendSmtpEmail);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling TransactionalEmailsApi#sendTransacEmail");
             e.printStackTrace();
         }
-
     }
+
+    private SendSmtpEmail createSendSmtpEmail(Message message) {
+        SendSmtpEmail sendSmtpEmail = new SendSmtpEmail();
+
+        SendSmtpEmailSender sender = new SendSmtpEmailSender();
+        sender.setEmail(this.notificationAddress);
+        sender.setName("Portfolio webpage");
+        sendSmtpEmail.setSender(sender);
+
+        SendSmtpEmailTo recipient = new SendSmtpEmailTo();
+        recipient.setEmail(this.notificationAddress);
+        sendSmtpEmail.setTo(List.of(recipient));
+
+        sendSmtpEmail.setSubject("Message from " + message.getName());
+        sendSmtpEmail.setHtmlContent("<html><body>" +
+                "<p>Name: " + message.getName() + "</p>" +
+                "<p>Email: " + message.getEmail() + "</p>" +
+                "<p>" + message.getMessage() + "</p></body></html>");
+
+        return sendSmtpEmail;
+    }
+
+
 }
