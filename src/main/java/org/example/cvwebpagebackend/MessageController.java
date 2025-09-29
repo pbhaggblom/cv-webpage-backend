@@ -15,7 +15,6 @@ public class MessageController {
 
     @PostMapping("/submit-message")
     public String submitMessage(@RequestParam String name, @RequestParam String email, @RequestParam String message) {
-        System.out.println(name + "\n" + email + "\n" + message);
-        return messageService.saveMessage(name, email, message);
+        return messageService.saveAndNotify(name, email, message);
     }
 }
