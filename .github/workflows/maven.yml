@@ -24,7 +24,7 @@ jobs:
       DB_USER: ${{ secrets.DB_USER }}
       DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
       BREVO_API_KEY: ${{ secrets.BREVOAPI_KEY }}
-      NOTIFICATION_RECIPIENT: ${{ secrets.NOTIFICATION_ADDRESS }}
+      NOTIFICATION_ADDRESS: ${{ secrets.NOTIFICATION_ADDRESS }}
 
     steps:
     - uses: actions/checkout@v4

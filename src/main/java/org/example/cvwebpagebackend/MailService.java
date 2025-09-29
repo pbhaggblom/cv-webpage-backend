@@ -43,12 +43,12 @@ public class MailService {
         SendSmtpEmail sendSmtpEmail = new SendSmtpEmail();
 
         SendSmtpEmailSender sender = new SendSmtpEmailSender();
-        sender.setEmail(this.notificationAddress);
+        sender.setEmail(notificationAddress);
         sender.setName("Portfolio webpage");
         sendSmtpEmail.setSender(sender);
 
         SendSmtpEmailTo recipient = new SendSmtpEmailTo();
-        recipient.setEmail(this.notificationAddress);
+        recipient.setEmail(notificationAddress);
         sendSmtpEmail.setTo(List.of(recipient));
 
         sendSmtpEmail.setSubject("Message from " + message.getName());
