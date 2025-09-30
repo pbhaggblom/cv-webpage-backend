@@ -1,5 +1,6 @@
 package org.example.cvwebpagebackend;
 
+import brevo.ApiException;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +25,13 @@ public class MessageController {
         if (bindingResult.hasFieldErrors()) {
             return new ResponseEntity<>(bindingResult.getFieldError().getDefaultMessage(), HttpStatus.BAD_REQUEST);
         }
-        messageService.saveAndNotify(messageDto);
-        return new ResponseEntity<>(HttpStatus.OK);
+
+        try {
+            messageService.saveAndNotify(messageDto);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Something went wrong, try again!", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        return new ResponseEntity<>("Thank you for your message!", HttpStatus.OK);
     }
 }

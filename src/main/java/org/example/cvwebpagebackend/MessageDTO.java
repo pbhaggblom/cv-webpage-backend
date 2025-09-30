@@ -7,14 +7,14 @@ import lombok.Data;
 @Data
 public class MessageDTO {
 
-    @NotEmpty(message = "Name ca not be empty")
+    @NotEmpty(message = "Name is required")
     private String name;
 
-    @Email(message = "Must be valid email address")
-    @NotEmpty(message = "Email can not be empty")
+    @Email(message = "Enter valid email address")
+    @NotEmpty(message = "Email is required")
     private String email;
 
-    @NotEmpty(message = "Message can not be empty")
+    @NotEmpty(message = "Message is required")
     private String message;
 
     public MessageDTO(String name, String email, String message) {

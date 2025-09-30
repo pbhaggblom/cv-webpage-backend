@@ -1,5 +1,6 @@
 package org.example.cvwebpagebackend;
 
+import brevo.ApiException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,7 +14,7 @@ public class MessageService {
         this.mailService = mailService;
     }
 
-    public String saveAndNotify(MessageDTO messageDTO) {
+    public void saveAndNotify(MessageDTO messageDTO) throws Exception {
         Message message = Message.builder()
                 .name(messageDTO.getName())
                 .email(messageDTO.getEmail())
@@ -21,7 +22,6 @@ public class MessageService {
                 .build();
         messageRepository.save(message);
         mailService.sendEmailNotification(message);
-        return "Thank you for your message!";
     }
 
 }
