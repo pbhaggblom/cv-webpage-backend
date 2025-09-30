@@ -1,20 +1,20 @@
 package org.example.cvwebpagebackend;
 
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 
 @Data
 public class MessageDTO {
 
-    @NotNull
+    @NotEmpty(message = "Name ca not be empty")
     private String name;
 
-    @Email
-    @NotNull
+    @Email(message = "Must be valid email address")
+    @NotEmpty(message = "Email can not be empty")
     private String email;
 
-    @NotNull
+    @NotEmpty(message = "Message can not be empty")
     private String message;
 
     public MessageDTO(String name, String email, String message) {

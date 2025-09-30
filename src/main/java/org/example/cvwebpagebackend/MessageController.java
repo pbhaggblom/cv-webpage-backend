@@ -1,6 +1,8 @@
 package org.example.cvwebpagebackend;
 
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,10 +18,11 @@ public class MessageController {
     }
 
     @PostMapping("/submit-message")
-    public String submitMessage(@Valid @RequestBody MessageDTO messageDto, BindingResult bindingResult) {
+    public ResponseEntity<String> submitMessage(@Valid @RequestBody MessageDTO messageDto, BindingResult bindingResult) {
         if (bindingResult.hasFieldErrors()) {
-            return "Something's missing";
+            return new ResponseEntity<>(bindingResult.getFieldError().getDefaultMessage(), HttpStatus.BAD_REQUEST);
         }
-        return messageService.saveAndNotify(messageDto);
+        messageService.saveAndNotify(messageDto);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
