@@ -13,8 +13,12 @@ public class MessageService {
         this.mailService = mailService;
     }
 
-    public String saveAndNotify(String name, String email, String content) {
-        Message message = new Message(name, email, content);
+    public String saveAndNotify(MessageDTO messageDTO) {
+        Message message = Message.builder()
+                .name(messageDTO.getName())
+                .email(messageDTO.getEmail())
+                .message(messageDTO.getMessage())
+                .build();
         messageRepository.save(message);
         mailService.sendEmailNotification(message);
         return "Thank you for your message!";
