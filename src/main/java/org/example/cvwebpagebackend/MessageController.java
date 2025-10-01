@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class MessageController {
 
     private final MessageService messageService;
+    private final FormValidator validator;
 
-    public MessageController(MessageService messageService) {
+    public MessageController(MessageService messageService, FormValidator validator) {
         this.messageService = messageService;
+        this.validator = validator;
     }
 
     @CrossOrigin
