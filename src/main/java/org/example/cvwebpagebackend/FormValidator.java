@@ -22,16 +22,16 @@ public class FormValidator {
         }
     }
 
-    private boolean validateName(String name) {
+    public boolean validateName(String name) {
         return name != null && name.length() >= minNameLength && name.length() <= maxNameLength;
     }
 
-    private boolean validateEmail(String email) {
+    public boolean validateEmail(String email) {
         String emailRegex = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
         return email.matches(emailRegex);
     }
 
-    private boolean validateMessage(String message) {
+    public boolean validateMessage(String message) {
         return message != null && message.length() >= minMessageLength && message.length() <= maxMessageLength;
     }
 }
