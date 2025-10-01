@@ -13,6 +13,7 @@ import org.springframework.test.web.servlet.assertj.MockMvcTester;
 import org.springframework.test.web.servlet.assertj.MvcTestResult;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.doThrow;
 
 
 @WebMvcTest(MessageController.class)
@@ -91,5 +92,28 @@ class MessageControllerTest {
                 .hasStatus(HttpStatus.BAD_REQUEST);
 
     }
-  
-}
+
+    @Test
+    void shouldReturnInternalServerError() throws Exception{
+        MessageDTO testMessage = new MessageDTO("name", "email@email.com", "message");
+
+        String requestBody = """
+             {
+             "name": "name",
+             "email": "email@email.com",
+             "message": "message"
+             }
+            """;
+
+        doThrow(new Exception()).when(messageService).saveAndNotify(testMessage);
+
+        MvcTestResult result = mockMvcTester.post()
+                .uri("/submit-message")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(requestBody)
+                .exchange();
+
+        assertThat(result)
+                .hasStatus(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
