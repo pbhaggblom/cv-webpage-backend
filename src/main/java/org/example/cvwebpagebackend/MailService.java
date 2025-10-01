@@ -21,7 +21,7 @@ public class MailService {
     @Value("${notification.address}")
     private String notificationAddress;
 
-    public void sendEmailNotification(Message message) {
+    public void sendEmailNotification(Message message) throws Exception {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
 
         ApiKeyAuth apiKeyAuth = (ApiKeyAuth) defaultClient.getAuthentication("api-key");
@@ -36,6 +36,7 @@ public class MailService {
         } catch (ApiException e) {
             System.err.println("Exception when calling TransactionalEmailsApi#sendTransacEmail");
             e.printStackTrace();
+            throw new Exception("Couldn't send email notification");
         }
     }
 
