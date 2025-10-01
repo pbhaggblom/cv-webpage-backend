@@ -1,6 +1,5 @@
 package org.example.cvwebpagebackend;
 
-import brevo.ApiException;
 import org.springframework.stereotype.Service;
 
 @Service
