@@ -2,6 +2,7 @@ package org.example.cvwebpagebackend;
 
 import jakarta.annotation.PostConstruct;
 import org.junit.jupiter.api.Test;
+import org.mockito.Answers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,9 @@ class MessageControllerTest {
     @MockitoBean
     MessageService messageService;
 
+    @MockitoBean(answers = Answers.CALLS_REAL_METHODS)
+    FormValidator validator;
+
     @Autowired
     MockMvc mockMvc;
 
@@ -31,7 +35,7 @@ class MessageControllerTest {
     }
 
     @Test
-    void shouldReturnOk() throws Exception {
+    void shouldReturnOk() {
         String requestBody = """
              {
              "name": "name",
@@ -51,7 +55,7 @@ class MessageControllerTest {
     }
 
     @Test
-    void shouldReturnBadRequest() throws Exception {
+    void shouldReturnBadRequest() {
         String requestBody1 = """
              {
              "name": "",

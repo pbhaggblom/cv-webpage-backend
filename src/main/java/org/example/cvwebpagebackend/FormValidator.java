@@ -10,7 +10,7 @@ public class FormValidator {
     private final int maxMessageLength = 200;
     private final int minMessageLength = 2;
 
-    public void validateInput(MessageDTO messageDTO) {
+    public void validateInput(MessageDTO messageDTO) throws IllegalArgumentException {
         if (!validateName(messageDTO.getName())) {
             throw new IllegalArgumentException("Name is required to be between " + minNameLength + " and " + maxNameLength + " characters");
         }

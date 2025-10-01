@@ -1,6 +1,5 @@
 package org.example.cvwebpagebackend;
 
-import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -21,7 +20,7 @@ public class MessageController {
 
     @CrossOrigin
     @PostMapping("/submit-message")
-    public ResponseEntity<String> submitMessage(@Valid @RequestBody MessageDTO messageDto) {
+    public ResponseEntity<String> submitMessage(@RequestBody MessageDTO messageDto) {
 
         try {
             validator.validateInput(messageDto);
