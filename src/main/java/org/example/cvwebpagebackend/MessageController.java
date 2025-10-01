@@ -1,10 +1,8 @@
 package org.example.cvwebpagebackend;
 
-import brevo.ApiException;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,9 +21,12 @@ public class MessageController {
 
     @CrossOrigin
     @PostMapping("/submit-message")
-    public ResponseEntity<String> submitMessage(@Valid @RequestBody MessageDTO messageDto, BindingResult bindingResult) {
-        if (bindingResult.hasFieldErrors()) {
-            return new ResponseEntity<>(bindingResult.getFieldError().getDefaultMessage(), HttpStatus.BAD_REQUEST);
+    public ResponseEntity<String> submitMessage(@Valid @RequestBody MessageDTO messageDto) {
+
+        try {
+            validator.validateInput(messageDto);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
 
         try {

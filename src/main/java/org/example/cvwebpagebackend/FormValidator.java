@@ -8,9 +8,9 @@ public class FormValidator {
     private final int maxNameLength = 20;
     private final int minNameLength = 2;
     private final int maxMessageLength = 200;
-    private final int minMessageLength = 1;
+    private final int minMessageLength = 2;
 
-    public boolean validateInput(MessageDTO messageDTO) {
+    public void validateInput(MessageDTO messageDTO) {
         if (!validateName(messageDTO.getName())) {
             throw new IllegalArgumentException("Name is required to be between " + minNameLength + " and " + maxNameLength + " characters");
         }
@@ -20,11 +20,10 @@ public class FormValidator {
         if (!validateMessage(messageDTO.getMessage())) {
             throw new IllegalArgumentException("Message is required to be between " + minMessageLength + " and " + maxMessageLength + " characters");
         }
-        return true;
     }
 
     private boolean validateName(String name) {
-        return name != null && name.length() > minNameLength && name.length() <= maxNameLength;
+        return name != null && name.length() >= minNameLength && name.length() <= maxNameLength;
     }
 
     private boolean validateEmail(String email) {
@@ -33,6 +32,6 @@ public class FormValidator {
     }
 
     private boolean validateMessage(String message) {
-        return message != null && message.length() > minMessageLength && message.length() <= maxMessageLength;
+        return message != null && message.length() >= minMessageLength && message.length() <= maxMessageLength;
     }
 }
