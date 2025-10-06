@@ -1,5 +1,8 @@
-package org.example.cvwebpagebackend;
+package org.example.cvwebpagebackend.controller;
 
+import org.example.cvwebpagebackend.util.FormValidator;
+import org.example.cvwebpagebackend.model.MessageDTO;
+import org.example.cvwebpagebackend.service.MessageService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -18,7 +21,7 @@ public class MessageController {
         this.validator = validator;
     }
 
-    @CrossOrigin
+    @CrossOrigin(origins = "https://pontushaggblom.netlify.app")
     @PostMapping("/submit-message")
     public ResponseEntity<String> submitMessage(@RequestBody MessageDTO messageDto) {
 

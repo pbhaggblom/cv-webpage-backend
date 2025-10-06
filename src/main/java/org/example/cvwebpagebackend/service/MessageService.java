@@ -1,5 +1,8 @@
-package org.example.cvwebpagebackend;
+package org.example.cvwebpagebackend.service;
 
+import org.example.cvwebpagebackend.model.Message;
+import org.example.cvwebpagebackend.model.MessageDTO;
+import org.example.cvwebpagebackend.repository.MessageRepository;
 import org.springframework.stereotype.Service;
 
 @Service
