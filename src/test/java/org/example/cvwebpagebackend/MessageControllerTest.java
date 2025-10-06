@@ -1,6 +1,10 @@
 package org.example.cvwebpagebackend;
 
 import jakarta.annotation.PostConstruct;
+import org.example.cvwebpagebackend.controller.MessageController;
+import org.example.cvwebpagebackend.model.MessageDTO;
+import org.example.cvwebpagebackend.service.MessageService;
+import org.example.cvwebpagebackend.util.FormValidator;
 import org.junit.jupiter.api.Test;
 import org.mockito.Answers;
 import org.springframework.beans.factory.annotation.Autowired;

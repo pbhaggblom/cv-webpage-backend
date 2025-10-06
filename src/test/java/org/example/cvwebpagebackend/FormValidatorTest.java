@@ -1,5 +1,7 @@
 package org.example.cvwebpagebackend;
 
+import org.example.cvwebpagebackend.model.MessageDTO;
+import org.example.cvwebpagebackend.util.FormValidator;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

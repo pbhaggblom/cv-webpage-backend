@@ -1,4 +1,4 @@
-package org.example.cvwebpagebackend;
+package org.example.cvwebpagebackend.model;
 
 import lombok.Data;
 

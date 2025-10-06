@@ -1,6 +1,7 @@
-package org.example.cvwebpagebackend;
+package org.example.cvwebpagebackend.service;
 
 import brevoModel.*;
+import org.example.cvwebpagebackend.model.Message;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 

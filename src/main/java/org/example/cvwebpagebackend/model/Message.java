@@ -1,4 +1,4 @@
-package org.example.cvwebpagebackend;
+package org.example.cvwebpagebackend.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -20,9 +20,4 @@ public class Message {
     private String email;
     private String message;
 
-    public Message(String name, String email, String message) {
-        this.name = name;
-        this.email = email;
-        this.message = message;
-    }
 }

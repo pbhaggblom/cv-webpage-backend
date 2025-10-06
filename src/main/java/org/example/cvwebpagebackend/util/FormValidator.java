@@ -1,5 +1,6 @@
-package org.example.cvwebpagebackend;
+package org.example.cvwebpagebackend.util;
 
+import org.example.cvwebpagebackend.model.MessageDTO;
 import org.springframework.stereotype.Component;
 
 @Component
