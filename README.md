@@ -36,6 +36,7 @@ Requests are sent with the following JSON-structure:
 * Register on https://developers.brevo.com/ and generate your own api key
 * Create an .env file in your project root folder and add following variables:
 
+```env
 # Database Configuration
 DB_URL=your_db_url
 DB_USERNAME=your_db_username
@@ -47,6 +48,7 @@ NOTIFICATION_ADDRESS=your_email_here
 
 # CORS Configuration
 CORS_ALLOWED_ORIGINS=http://localhost:3000
+```
 
 ## Tech stack
 
