@@ -20,6 +20,7 @@ Requests are sent with the following JSON-structure:
   "email": "name@example.com",
   "message": "Your message here"
 }
+```
 
 ### Responses
 
