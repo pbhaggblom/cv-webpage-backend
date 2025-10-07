@@ -6,6 +6,11 @@ Simple backend application for receiving messages from a contact form on a portf
 
 This application handles contact form submissions from a portfolio webpage frontend. It validates incoming form data and returns appropriate error messages for invalid fields. Valid messages are stored in a PostgreSQL database, and an email notification is sent to the site owner.
 
+### API Endpoints
+| Method | Endpoint | Action |
+| --- | --- | --- |
+| POST | /submit-message | To submit a message to the database and notify site owner |
+
 ## Tech stack
 
 ### Language
