@@ -28,6 +28,26 @@ Requests are sent with the following JSON-structure:
 * 400 Bad request - Invalid field data (with error details)
 * 500 Internal server error - Server error
 
+### Installation Guide
+
+* Clone this repository
+* Install all dependencies with Maven
+* Set up a database
+* Register on https://developers.brevo.com/ and generate your own api key
+* Create an .env file in your project root folder and add following variables:
+
+# Database Configuration
+DB_URL=your_db_url
+DB_USERNAME=your_db_username
+DB_PASSWORD=your_db_password
+
+# Brevo Email API
+BREVO_API_KEY=your_brevo_api_key_here
+NOTIFICATION_ADDRESS=your_email_here
+
+# CORS Configuration
+CORS_ALLOWED_ORIGINS=http://localhost:3000
+
 ## Tech stack
 
 ### Language
