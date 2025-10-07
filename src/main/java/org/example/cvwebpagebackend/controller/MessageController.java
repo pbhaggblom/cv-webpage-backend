@@ -21,7 +21,7 @@ public class MessageController {
         this.validator = validator;
     }
 
-    @CrossOrigin(origins = "https://pontushaggblom.netlify.app")
+    @CrossOrigin(origins = "${cors.allowed.origins}")
     @PostMapping("/submit-message")
     public ResponseEntity<String> submitMessage(@RequestBody MessageDTO messageDto) {
 
